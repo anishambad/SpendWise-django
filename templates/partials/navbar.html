@@ -1,0 +1,12 @@
+<nav class="bg-white border-b border-gray-200">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="{% url 'core:home' %}" class="text-xl font-bold text-emerald-600">
+            SpendWise
+        </a>
+        <div class="flex items-center gap-6 text-sm font-medium">
+            <a href="{% url 'core:home' %}" class="hover:text-emerald-600">Dashboard</a>
+            <a href="{% url 'admin:index' %}" class="hover:text-emerald-600">Admin</a>
+            <a href="{% url 'core:about' %}" class="hover:text-emerald-600">About Us</a>
+        </div>
+    </div>
+</nav>
