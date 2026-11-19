@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Expenses | SpendWise{% endblock %}
+
+{% block content %}
+    <div class="flex items-center justify-between">
+        <h1 class="text-2xl font-bold">Expenses</h1>
+        <span class="text-sm text-gray-500">{{ expenses|length }} records</span>
+    </div>
+
+    <div class="mt-6 overflow-x-auto rounded-xl border border-gray-200 bg-white">
+        <table class="w-full text-sm">
+            <thead class="bg-gray-100 text-left text-gray-600">
+                <tr>
+                    <th class="px-4 py-3">#</th>
+                    <th class="px-4 py-3">Title</th>
+                    <th class="px-4 py-3">Category</th>
+                    <th class="px-4 py-3">Date</th>
+                    <th class="px-4 py-3 text-right">Amount</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for expense in expenses %}
+                    <tr>
+                        <td class="px-4 py-3 text-gray-400">{{ forloop.counter }}</td>
+                        <td class="px-4 py-3 font-medium">{{ expense.title }}</td>
+                        <td class="px-4 py-3">
+                            <span class="rounded-full bg-emerald-50 px-2 py-1 text-xs text-emerald-700">
+                                {{ expense.category|default:"Uncategorised" }}
+                            </span>
+                        </td>
+                        <td class="px-4 py-3">{{ expense.date|date:"d M Y" }}</td>
+                        <td class="px-4 py-3 text-right amount">₹{{ expense.amount|floatformat:2 }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="px-4 py-8 text-center text-gray-400">
+                            No expenses yet.
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot class="bg-gray-50 font-semibold">
+                <tr>
+                    <td colspan="4" class="px-4 py-3 text-right">Total</td>
+                    <td class="px-4 py-3 text-right amount">₹{{ total|floatformat:2 }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+{% endblock %}
